@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Min PC</string>
+    <string name="btn_edit">Rediger</string>
+    <string name="btn_details">Detaljer</string>
+    <string name="btn_cancel">Annuller</string>
+    <string name="txt_name">Navn</string>
+    <string name="txt_memory">Hukommelse</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+</resources>
