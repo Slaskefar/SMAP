@@ -17,6 +17,9 @@ public class EditDetailActivity extends AppCompatActivity {
     Button btnOk;
     Button btnCancel;
     RadioButton radioButtonYes;
+    static String PC_NAME;
+    static String MEMORY;
+    static String LAPTOP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,10 @@ public class EditDetailActivity extends AppCompatActivity {
 
         Intent data = getIntent();
 
+        PC_NAME = getString(R.string.txt_name);
+        LAPTOP = getString(R.string.laptop);
+        MEMORY = getString(R.string.txt_memory);
+
         editTxtName = (EditText) findViewById(R.id.editTxtName);
         editTxtMemory = (EditText) findViewById(R.id.editTxtMemory);
         radioGroupLaptop = (RadioGroup) findViewById(R.id.radioGroupLaptop);
@@ -32,12 +39,12 @@ public class EditDetailActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancel);
         radioButtonYes = (RadioButton) findViewById(R.id.radioButtonYes);
 
-        editTxtName.setText(data.getCharSequenceExtra("PcName"));
-        editTxtMemory.setText(data.getCharSequenceExtra("Memory"));
+        editTxtName.setText(data.getCharSequenceExtra(PC_NAME));
+        editTxtMemory.setText(data.getCharSequenceExtra(MEMORY));
 
-        if(data.getCharSequenceExtra("Laptop").toString() == "Yes") {
+        if(data.getCharSequenceExtra(LAPTOP).toString() == "Yes") {
             radioGroupLaptop.check(R.id.radioButtonYes);
-        } else if (data.getCharSequenceExtra("Laptop").toString() == "No") {
+        } else if (data.getCharSequenceExtra(LAPTOP).toString() == "No") {
             radioGroupLaptop.check(R.id.radioButtonNo);
         }
 
@@ -45,15 +52,15 @@ public class EditDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("PcName", editTxtName.getText());
-                intent.putExtra("Memory", editTxtMemory.getText());
+                intent.putExtra(PC_NAME, editTxtName.getText());
+                intent.putExtra(MEMORY, editTxtMemory.getText());
                 CharSequence laptop;
                 if(radioGroupLaptop.getCheckedRadioButtonId() == radioButtonYes.getId()) {
                     laptop = getString(R.string.yes);
                 } else {
                     laptop = getString(R.string.no);
                 }
-                intent.putExtra("Laptop", laptop);
+                intent.putExtra(LAPTOP, laptop);
                 setResult(RESULT_OK, intent);
                 finish();
              }

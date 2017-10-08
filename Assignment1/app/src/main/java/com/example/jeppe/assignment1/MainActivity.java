@@ -23,6 +23,9 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     static final int INSPECT_PC_DETAILS = 0;
+    static String PC_NAME;
+    static String MEMORY;
+    static String LAPTOP;
 
     ImageButton btnImage;
     Button btnDetails;
@@ -42,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
         btnDetails = (Button) findViewById(R.id.btnDetails);
         txtPcName = (TextView) findViewById(R.id.txtPcName);
 
+        PC_NAME = getString(R.string.txt_name);
+        LAPTOP = getString(R.string.laptop);
+        MEMORY = getString(R.string.txt_memory);
+
         if(savedInstanceState != null) {
-            txtPcName.setText(savedInstanceState.getCharSequence("PcName"));
-            memory = savedInstanceState.getCharSequence("Memory");
-            laptop = savedInstanceState.getCharSequence("Laptop");
+            txtPcName.setText(savedInstanceState.getCharSequence(PC_NAME));
+            memory = savedInstanceState.getCharSequence(MEMORY);
+            laptop = savedInstanceState.getCharSequence(LAPTOP);
             pcImage = savedInstanceState.getParcelable("BitmapImage");
             btnImage.setImageBitmap(pcImage);
         }
@@ -61,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("PcName", txtPcName.getText());
-                intent.putExtra("Memory", memory);
-                intent.putExtra("Laptop", laptop);
+                intent.putExtra(PC_NAME, txtPcName.getText());
+                intent.putExtra(MEMORY, memory);
+                intent.putExtra(LAPTOP, laptop);
                 startActivityForResult(intent, INSPECT_PC_DETAILS);
             }
         });
@@ -82,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
          else if(requestCode == INSPECT_PC_DETAILS) {
             if(resultCode == RESULT_OK) {
-                txtPcName.setText(data.getCharSequenceExtra("PcName"));
-                memory = data.getCharSequenceExtra("Memory");
-                laptop = data.getCharSequenceExtra("Laptop");
+                txtPcName.setText(data.getCharSequenceExtra(PC_NAME));
+                memory = data.getCharSequenceExtra(MEMORY);
+                laptop = data.getCharSequenceExtra(LAPTOP);
             }
         }
     }
@@ -100,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putCharSequence("PcName", txtPcName.getText());
-        outState.putCharSequence("Memory", memory);
-        outState.putCharSequence("Laptop", laptop);
+        outState.putCharSequence(PC_NAME, txtPcName.getText());
+        outState.putCharSequence(MEMORY, memory);
+        outState.putCharSequence(LAPTOP, laptop);
         outState.putParcelable("BitmapImage", pcImage);
         super.onSaveInstanceState(outState);
     }
